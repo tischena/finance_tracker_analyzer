@@ -65,5 +65,5 @@ def categorize(description):
 
 df["Category"] = df["Description"].apply(categorize)
 
-#other_df = df[df["Category"] == "Other"]
-#print(len(other_df)) # 0
+other_df = df[df["Category"] == "Other"]
+print(len(other_df)) # 0
