@@ -1,4 +1,4 @@
-from extract.extract_from_excel import df
+from src.extract.extract_from_excel import df
 import re
 
 category_rules = {
@@ -65,5 +65,8 @@ def categorize(description):
 
 df["Category"] = df["Description"].apply(categorize)
 
-other_df = df[df["Category"] == "Other"]
-print(len(other_df)) # 0
+#other_df = df[df["Category"] == "Other"]
+#print(len(other_df)) # 0
+
+#categories = df.groupby("Category")
+#print(categories.all().to_string()) #Bills, Eating out, Entertainment, Fitness, Groceries, Health, Income, Shopping, Transport
