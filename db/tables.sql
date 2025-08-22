@@ -1,4 +1,5 @@
---DROP TABLE IF EXISTS example;
+DROP TABLE IF EXISTS transactions;
+DROP TABLE IF EXISTS categories;
 
 CREATE TABLE categories(
     category_id SERIAL PRIMARY KEY,
