@@ -1,7 +1,7 @@
 #use sqlalchemy
 
 from sqlalchemy import create_engine
-from db.config import config
+from config import config
 
 def get_engine():
     params = config()

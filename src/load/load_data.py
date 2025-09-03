@@ -46,9 +46,9 @@ with engine.begin() as conn:
                 "category_id": category_map[row['Category']]
             }
         )
-    transactions_result = conn.execute(text("SELECT * FROM transactions"))
-    for row in transactions_result:
-        print(row)
+    # transactions_result = conn.execute(text("SELECT * FROM transactions"))
+    # for row in transactions_result:
+    #     print(row)
 
 
 
