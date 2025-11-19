@@ -1,3 +1,18 @@
+"""
+Inserts categorized transaction data into the database using SQLAlchemy.
+
+The script loads the transformed DataFrame, adds all unique categories to the
+'categories' table, retrieves their IDs, and then inserts each transaction into
+the 'transactions' table with the correct category reference.
+
+Tables Updated:
+    - categories
+    - transactions
+
+Returns:
+    None: All changes are committed directly to the database.
+"""
+
 from src.transform.transformed_data import df
 from sqlalchemy import text
 from db.connection import get_engine

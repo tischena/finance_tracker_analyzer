@@ -1,3 +1,31 @@
+"""
+Processes and categorizes transaction data based on predefined keyword rules.
+
+This module imports a DataFrame containing transaction records and assigns a 
+category to each transaction by matching keywords found in the transaction 
+description. Keyword-to-category mappings are defined in 'category_rules', 
+normalized to allow flexible matching, and applied to the DataFrame.
+
+Functions:
+    normalize(text): Removes non-alphanumeric characters from text to improve 
+        consistency when performing keyword matching.
+    categorize(description): Determines the category of a transaction 
+        description by comparing normalized text to the predefined rules.
+
+Workflow:
+    1. Import transaction DataFrame from the extract layer.
+    2. Define keyword-based category mapping rules.
+    3. Normalize rule keys to enable reliable substring matching.
+    4. Clean whitespace in the Description column.
+    5. Apply the 'categorize' function to generate a new 'Category' column 
+       for each transaction.
+
+Output:
+    The DataFrame 'df' is updated in place with a new 'Category' column 
+    containing values such as 'Groceries', 'Transport', 'Fitness', 
+    'Entertainment', or 'Other' if no rule matches.
+"""
+
 from src.extract.extract_from_excel import df
 import re
 
