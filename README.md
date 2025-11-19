@@ -1,53 +1,107 @@
-<!-- Summary:
-Build a tool to track personal expenses, automatically categorize them (e.g. groceries, rent, entertainment), and store results in a database with visual analytics.
+# Transaction Categorization and Database Pipeline
 
-Key Skills Used:
-Python (pandas, regex, datetime)
-PostgreSQL/MySQL
-ETL logic
-Excel file processing
+## Table of Contents
 
-Optional: Matplotlib/Seaborn or Streamlit
+* [About](#about)
+* [Features](#features)
+* [Getting Started](#getting-started)
+  * [Prerequisites](#prerequisites)
+  * [Installation](#installation)
+* [Usage](#usage)
+* [Database](#database)
+* [Visualization](#visualization)
 
-Steps:
-Input CSV/Excel bank statements.
-Parse and clean data, auto-tag categories.
-Store results in PostgreSQL.
-Show summaries (monthly spend, categories, trends).
+## About
 
-Stretch goal: Add a rule-based classifier to categorize transactions. 
+This Data Engineering project demonstrates a complete ETL pipeline for personal transaction data. The pipeline extracts data from Excel files, categorizes transactions using a rule-based approach, loads them into a PostgreSQL database, and visualizes insights in Power BI.
 
-Project Workflow:
-1.Extract:
-Load data from CSVs or Excel (bank statements or sample datasets).
-Use libraries like pandas, openpyxl, or csv.
+## Features
 
-2.Transform:
-Clean missing/invalid data.
-Parse dates, extract merchant names.
-Categorize transactions: e.g., “Tesco” → Groceries.
+* Automates extraction of transaction data from Excel files.
+* Applies rule-based transaction categorization.
+* Loads categorized data into PostgreSQL with a structured schema.
+* Supports analytics and visualization in Power BI.
+* Ensures data integrity and traceability in the database.
 
-3.Load
-Store in a PostgreSQL or SQLite database.
-Build a schema: transactions, categories, summary.
+## Getting Started
 
-4.Analyze
-Monthly spend trends.
-Category breakdowns.
-Biggest changes month-over-month.
+### Prerequisites
 
-5.Visualize (Optional)
-Use Matplotlib, Seaborn, or Plotly.
-Create a Streamlit dashboard (easy + interactive).
+* Python 3.9 or later
+* PostgreSQL installed and running
+* SQLAlchemy and psycopg2 for database connections
+* Pandas library for data processing
+* Access to Excel files containing transaction data
+* Power BI for visualization (optional, for dashboards)
 
-🧠 Add-on Analysis Ideas:
-Compare spending to budget
-Detect unusual spikes
-Cluster expenses using K-Means (mini intro to unsupervised ML)
-Generate monthly financial health reports (automated PDF or dashboard)
+### Installation
 
-📊 Tools Stack:
-Python (pandas, numpy, matplotlib, seaborn)
-PostgreSQL or SQLite (lightweight)
-VS Code
-Optionally: Streamlit or Jupyter Notebooks for interactive analysis-->
+1.Clone the repository:
+
+```bash
+git clone <repo-url>
+cd <repo-folder>
+```
+
+2.Create a virtual environment:
+
+```bash
+python -m venv venv
+source venv/bin/activate  # Linux/macOS
+venv\Scripts\activate     # Windows
+```
+
+3.Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+4.Configure your PostgreSQL database credentials in `config.py` or the `.ini` file.
+
+5.Initialize the database schema:
+
+```bash
+psql -f schema.sql -U <username> -d <database_name>
+```
+
+## Usage
+
+The pipeline consists of three main stages:
+
+1.**Extract** – Load raw transaction data from an Excel file:
+
+```bash
+python extract_from_excel.py
+```
+
+2.**Transform** – Clean and categorize the transactions:
+
+```bash
+python categorize_transactions.py
+```
+
+3.**Load** – Insert the categorized data into PostgreSQL:
+
+```bash
+python load_to_database.py
+```
+
+Once data is loaded, use Power BI to connect to the database and visualize spending patterns.
+
+## Database
+
+* **Configuration:** `config.py` reads database credentials from `.ini` files.
+* **Engine:** `connection.py` uses SQLAlchemy to connect to PostgreSQL.
+* **Schema:** `schema.sql` creates two tables:
+  * `categories` – Stores unique category names.
+  * `transactions` – Stores individual transactions with category references.
+
+## Visualization
+
+* Power BI dashboards visualize:
+
+  * Spending breakdown by category
+  * Trends over time
+  * Comparison of different spending areas
+* The dashboards use the PostgreSQL tables as their data source.
